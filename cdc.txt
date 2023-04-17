@@ -1,0 +1,41 @@
+STACK:
+
+DB Postgresql
+API Node/Fastify/TS
+ORM ?
+FRONT React/TS
+AUTH Firebase ?
+
+TABLES:
+
+engine -> liste les engins
+id
+name
+reference
+price
+availability
+description
+
+bookings -> relis les engine et les users avec date début / date fin
+id
+engine
+users
+startDate
+endDate
+
+users -> liste les users
+id
+firstname
+lastname
+email
+
+FEATURES:
+
+- Page produits
+- Page détails produit
+  - Bouton résa
+  - Calendrier résa
+
+- Messages toast
+
+
