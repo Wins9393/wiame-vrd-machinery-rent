@@ -21,8 +21,13 @@ import {
   LoginRequestBody,
 } from "../interfaces/UserRequestParams";
 
-// Auth
-import { generateToken, hashPassword, verifyPassword } from "../auth";
+// Auth (Sécuriser les routes)
+import {
+  generateToken,
+  hashPassword,
+  verifyPassword,
+  isAuthenticated,
+} from "../auth";
 
 const userController = new UserController();
 

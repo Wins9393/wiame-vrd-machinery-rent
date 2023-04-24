@@ -23,6 +23,9 @@ import {
   BookingsUpdateRequestBody,
 } from "../interfaces/BookingsRequestParams";
 
+// Auth (Sécuriser les routes)
+import { isAuthenticated } from "../auth";
+
 const bookingsController = new BookingsController();
 const engineController = new EngineController();
 const userController = new UserController();

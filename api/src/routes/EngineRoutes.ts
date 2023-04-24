@@ -17,7 +17,8 @@ import {
 // Interfaces
 import { EngineIdParams } from "../interfaces/EngineRequestParams";
 
-// Auth
+// Auth (Sécuriser les routes)
+import { isAuthenticated } from "../auth";
 
 const engineController = new EngineController();
 

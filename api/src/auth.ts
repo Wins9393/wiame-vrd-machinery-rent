@@ -33,7 +33,7 @@ export function verifyToken(token: string): number | null {
   }
 }
 
-async function isAuthenticated(
+export async function isAuthenticated(
   request: RequestWithUser,
   reply: FastifyReply,
   next: () => void
