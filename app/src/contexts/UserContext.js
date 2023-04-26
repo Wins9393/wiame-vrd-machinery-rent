@@ -22,7 +22,6 @@ const Provider = ({ children }) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       getUser(data.token);
 
       sessionStorage.setItem("toto", data.token);
@@ -47,9 +46,8 @@ const Provider = ({ children }) => {
         password: infosUser.password,
       }),
     });
-    const data = await response.json();
-
-    console.log(data);
+    // const data = await response.json();
+    // console.log(data);
   };
 
   const getUser = async (token) => {
@@ -63,10 +61,21 @@ const Provider = ({ children }) => {
         body: JSON.stringify({ token }),
       }
     );
-    const data = await response.json();
-    setUser(data);
 
-    console.log(data);
+    if (response.ok) {
+      const data = await response.json();
+      setUser(data);
+      setIsConnected(true);
+    }
+  };
+
+  const getToken = () => {
+    if (sessionStorage.getItem("toto")) {
+      const token = sessionStorage.getItem("toto");
+      setUserId(token);
+      return token;
+    }
+    return;
   };
 
   const logout = () => {
@@ -84,6 +93,7 @@ const Provider = ({ children }) => {
         verifyCredentials,
         createUser,
         isConnected,
+        getToken,
         logout,
       }}
     >

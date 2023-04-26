@@ -1,12 +1,16 @@
 import "./App.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "./contexts/UserContext";
 import LoginPage from "./containers/login-page/LoginPage";
 import Home from "./containers/home/Home";
 import Navbar from "./components/navbar/Navbar";
 
 function App() {
-  const { isConnected } = useContext(UserContext);
+  const { isConnected, getUser, userId, getToken } = useContext(UserContext);
+
+  useEffect(() => {
+    getUser(getToken());
+  }, [userId]);
 
   return isConnected ? (
     <div className="App">
