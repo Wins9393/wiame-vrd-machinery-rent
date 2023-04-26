@@ -12,9 +12,11 @@ const Home = () => {
 
   return engines.length ? (
     <div className="home__engine-container">
-      {engines.map((engine) => (
-        <Engine engine={engine} />
-      ))}
+      <div className="home__engine-wrapper">
+        {engines.map((engine) => (
+          <Engine key={engine.id} engine={engine} />
+        ))}
+      </div>
     </div>
   ) : (
     "Chargement..."

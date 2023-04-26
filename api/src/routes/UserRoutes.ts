@@ -26,6 +26,7 @@ import {
   generateToken,
   hashPassword,
   verifyPassword,
+  verifyToken,
   isAuthenticated,
 } from "../auth";
 
@@ -73,6 +74,39 @@ export function registerUserRoutes(server: FastifyInstance) {
   server.get("/users", async () => {
     return await userController.findAll();
   });
+
+  server.post<{ Body: { token: string } }>(
+    "/verify-token",
+    async (request, reply) => {
+      const { token } = request.body;
+
+      if (!token) {
+        reply.status(400).send({ message: "Missing token" });
+        return;
+      }
+
+      const userId = verifyToken(token);
+      if (userId === null) {
+        reply.status(401).send({ message: "Invalid or expired token" });
+        return;
+      }
+
+      const user = await userController.findOne(userId);
+      if (!user) {
+        reply.status(404).send({ message: "User not found" });
+        return;
+      }
+
+      const userResponse = {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+      };
+
+      reply.send(userResponse);
+    }
+  );
 
   server.get(
     "/user/:id",

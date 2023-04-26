@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Card, Badge } from "antd";
 import "./engine.css";
 
 const Engine = ({ engine }) => {
@@ -8,7 +8,6 @@ const Engine = ({ engine }) => {
     let formatDesc;
     if (desc.length > 140) {
       formatDesc = desc.slice(0, 140);
-      console.log(formatDesc);
       return `${formatDesc}...`;
     }
     return desc;
@@ -21,7 +20,11 @@ const Engine = ({ engine }) => {
       cover={<img alt={engine.name} src={engine.imageUrl} />}
       actions={[
         engine.price + "€",
-        engine.availability ? "In stock" : "Out of stock",
+        engine.availability ? (
+          <Badge key={"green"} color={"green"} text={"In Stock"} />
+        ) : (
+          <Badge key={"red"} color={"red"} text={"Out of stock"} />
+        ),
       ]}
       extra={engine.reference}
     >

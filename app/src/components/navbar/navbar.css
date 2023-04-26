@@ -1,0 +1,23 @@
+.navbar {
+  width: 100%;
+  height: 6vh;
+  background-color: #cd6133;
+  padding: 0 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar__user-items {
+  width: 80px;
+  display: flex;
+  justify-content: space-between;
+}
