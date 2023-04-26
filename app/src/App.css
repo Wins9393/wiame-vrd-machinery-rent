@@ -10,10 +10,8 @@ a {
 
 .App {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 90vh;
   background-color: #ecf0f1;
   margin-top: 6vh;
 }

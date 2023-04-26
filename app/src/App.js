@@ -22,9 +22,7 @@ function App() {
       {location.pathname === "/" ? <Home /> : <Outlet />}
     </div>
   ) : (
-    <div className="App">
-      <LoginPage />
-    </div>
+    <LoginPage />
   );
 }
 

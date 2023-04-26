@@ -34,132 +34,132 @@ const LoginPage = () => {
   };
 
   return (
-    <Form
-      className="login-form"
-      name="basic"
-      labelCol={{
-        span: 8,
-      }}
-      wrapperCol={{
-        span: 16,
-      }}
-      style={{
-        maxWidth: 600,
-      }}
-      initialValues={{
-        remember: true,
-      }}
-      onFinishFailed={onFinishFailed}
-      onValuesChange={onValuesChange}
-      autoComplete="off"
-    >
-      {!isLogin ? (
-        <Form.Item
-          label="Prénom"
-          name="firstName"
-          rules={[
-            {
-              required: true,
-              message: "Please input your firstname!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-      ) : (
-        ""
-      )}
-
-      {!isLogin ? (
-        <Form.Item
-          label="Nom"
-          name="lastName"
-          rules={[
-            {
-              required: true,
-              message: "Please input your lastname!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-      ) : (
-        ""
-      )}
-
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: "Please input your email!",
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
-        label="Password"
-        name="password"
-        rules={[
-          {
-            required: true,
-            message: "Please input your password!",
-          },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
-
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
+    <div className="login__container">
+      <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
+      <Form
+        className="login__form"
+        name="basic"
+        labelCol={{
+          span: 8,
         }}
-      >
-        {!isLogin ? (
-          <div className="create-account">
-            Déjà un compte ?{" "}
-            <Button
-              type="link"
-              className="create-account-btn"
-              onClick={toggleLoginRegister}
-            >
-              Se connecter !
-            </Button>
-          </div>
-        ) : (
-          <div className="create-account">
-            Pas encore de compte ?{" "}
-            <Button
-              type="link"
-              className="create-account-btn"
-              onClick={toggleLoginRegister}
-            >
-              Créez-en un !
-            </Button>
-          </div>
-        )}
-      </Form.Item>
-
-      <Form.Item
         wrapperCol={{
-          offset: 8,
           span: 16,
         }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinishFailed={onFinishFailed}
+        onValuesChange={onValuesChange}
+        autoComplete="off"
       >
         {!isLogin ? (
-          <Button type="primary" onClick={() => onRegister(formInfos)}>
-            Création du compte
-          </Button>
+          <Form.Item
+            label="Prénom"
+            name="firstName"
+            rules={[
+              {
+                required: true,
+                message: "Please input your firstname!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
         ) : (
-          <Button type="primary" onClick={() => onConnexion(formInfos)}>
-            Connexion
-          </Button>
+          ""
         )}
-      </Form.Item>
-    </Form>
+
+        {!isLogin ? (
+          <Form.Item
+            label="Nom"
+            name="lastName"
+            rules={[
+              {
+                required: true,
+                message: "Please input your lastname!",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+        ) : (
+          ""
+        )}
+
+        <Form.Item
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Please input your email!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+          ]}
+        >
+          <Input.Password />
+        </Form.Item>
+
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+          }}
+        >
+          {!isLogin ? (
+            <div className="create-account">
+              Déjà un compte ?{" "}
+              <Button
+                type="link"
+                className="create-account-btn"
+                onClick={toggleLoginRegister}
+              >
+                Se connecter !
+              </Button>
+            </div>
+          ) : (
+            <div className="create-account">
+              Pas encore de compte ?{" "}
+              <Button
+                type="link"
+                className="create-account-btn"
+                onClick={toggleLoginRegister}
+              >
+                Créez-en un !
+              </Button>
+            </div>
+          )}
+        </Form.Item>
+
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          {!isLogin ? (
+            <Button type="primary" onClick={() => onRegister(formInfos)}>
+              Création du compte
+            </Button>
+          ) : (
+            <Button type="primary" onClick={() => onConnexion(formInfos)}>
+              Connexion
+            </Button>
+          )}
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 export default LoginPage;

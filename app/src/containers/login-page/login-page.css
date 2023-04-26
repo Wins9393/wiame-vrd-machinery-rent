@@ -1,4 +1,13 @@
-.login-form {
+.login__container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login__form {
   background-color: #ccc;
   padding: 32px;
   border-radius: 8px;
