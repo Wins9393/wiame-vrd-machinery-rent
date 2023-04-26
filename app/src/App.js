@@ -2,16 +2,19 @@ import "./App.css";
 import { useContext } from "react";
 import UserContext from "./contexts/UserContext";
 import LoginPage from "./containers/login-page/LoginPage";
+import Home from "./containers/home/Home";
 
 function App() {
   const { isConnected } = useContext(UserContext);
 
   return isConnected ? (
     <div className="App">
-      <h2>Bienvenue !</h2>
+      <Home />
     </div>
   ) : (
-    <LoginPage />
+    <div className="App">
+      <LoginPage />
+    </div>
   );
 }
 

@@ -1,0 +1,7 @@
+.login-form {
+  background-color: #ccc;
+  padding: 32px;
+  border-radius: 8px;
+  flex: 0 1 300px;
+  width: 500px;
+}

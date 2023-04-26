@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
+import "./login-page.css";
 
 const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -34,6 +35,7 @@ const LoginPage = () => {
 
   return (
     <Form
+      className="login-form"
       name="basic"
       labelCol={{
         span: 8,
@@ -114,7 +116,6 @@ const LoginPage = () => {
       <Form.Item
         wrapperCol={{
           offset: 8,
-          span: 16,
         }}
       >
         {!isLogin ? (

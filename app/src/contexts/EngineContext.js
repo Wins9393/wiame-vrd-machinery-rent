@@ -9,11 +9,13 @@ const Provider = ({ children }) => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/engines`);
     const data = await response.json();
 
+    console.log(data);
+
     setEngines(data);
   };
 
   return (
-    <EngineContext.Provider value={{ engines }}>
+    <EngineContext.Provider value={{ getAllEngines, engines }}>
       {children}
     </EngineContext.Provider>
   );
