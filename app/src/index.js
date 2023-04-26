@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { Provider as UserProvider } from "./contexts/UserContext";
 import { Provider as EngineContext } from "./contexts/EngineContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import EngineDetails from "./containers/engine-details/EngineDetails";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/engine/:id",
-        element: "",
+        element: <EngineDetails />,
       },
     ],
   },
