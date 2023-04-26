@@ -79,6 +79,7 @@ const Provider = ({ children }) => {
   };
 
   const logout = () => {
+    sessionStorage.removeItem("toto");
     setIsConnected(false);
     setUserId(null);
     setUser(null);
