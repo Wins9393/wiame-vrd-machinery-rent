@@ -17,7 +17,7 @@ import {
 // Interfaces
 import { EngineIdParams } from "../interfaces/EngineRequestParams";
 
-// Auth (Sécuriser les routes)
+// Auth
 import { isAuthenticated } from "../auth";
 
 const engineController = new EngineController();
@@ -25,7 +25,7 @@ const engineController = new EngineController();
 export function registerEngineRoutes(server: FastifyInstance) {
   server.post(
     "/engine",
-    { schema: createEngineSchema },
+    { schema: createEngineSchema, preHandler: isAuthenticated },
     async (request, reply) => {
       const engineData = request.body as Engine;
       const engine = new Engine();
@@ -35,13 +35,13 @@ export function registerEngineRoutes(server: FastifyInstance) {
     }
   );
 
-  server.get("/engines", async () => {
+  server.get("/engines", { preHandler: isAuthenticated }, async () => {
     return await engineController.findAll();
   });
 
   server.get(
     "/engine/:id",
-    { schema: getEngineSchema },
+    { schema: getEngineSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: EngineIdParams }>) => {
       const id = parseInt(request.params.id);
       return await engineController.findOne(id);
@@ -50,7 +50,7 @@ export function registerEngineRoutes(server: FastifyInstance) {
 
   server.put(
     "/engine/:id",
-    { schema: updateEngineSchema },
+    { schema: updateEngineSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: EngineIdParams }>) => {
       const id = parseInt(request.params.id);
       return await engineController.update(id, request.body);
@@ -59,7 +59,7 @@ export function registerEngineRoutes(server: FastifyInstance) {
 
   server.delete(
     "/engine/:id",
-    { schema: deleteEngineSchema },
+    { schema: deleteEngineSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: EngineIdParams }>) => {
       const id = parseInt(request.params.id);
       await engineController.delete(id);

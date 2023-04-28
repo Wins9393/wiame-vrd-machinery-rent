@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import EngineContext from "../../contexts/EngineContext";
+import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import { Row, Col, Badge, DatePicker } from "antd";
 import locale from "antd/es/date-picker/locale/fr_FR";
@@ -14,7 +15,7 @@ const EngineDetails = () => {
   const [bookingInfos, setBookingInfos] = useState([]);
   const { getOneEngine, engine } = useContext(EngineContext);
   const { user } = useContext(UserContext);
-  const { createBooking, createdBooking } = useContext(BookingContext);
+  const { createBooking } = useContext(BookingContext);
 
   let { id } = useParams();
   const { RangePicker } = DatePicker;
@@ -32,12 +33,6 @@ const EngineDetails = () => {
     });
   }, [user, rentDate, engine]);
 
-  useEffect(() => {
-    if (createdBooking) {
-      toast.success("Booking successfully completed !");
-    }
-  }, [createdBooking]);
-
   const onDateChange = (value) => {
     let startDate = new Date(value[0].$d);
     let endDate = new Date(value[1].$d);
@@ -52,24 +47,26 @@ const EngineDetails = () => {
     setRentDate(rentDate);
   };
 
+  const disabledDate = (current) => {
+    return current && current < dayjs().endOf("day");
+  };
+
   const onRentClick = async (booking) => {
     if (!engine.availability) {
       toast.error("This engine is not available !");
-    } else {
-      if (
-        rentDate?.startDate === undefined ||
-        rentDate?.endDate === undefined
-      ) {
-        toast.error("Please choose rent date !");
-      }
-      createBooking(
-        booking.engine_id,
-        booking.user_id,
-        booking.start_date,
-        booking.end_date
-      );
+      return;
     }
-    console.log(booking);
+    if (rentDate?.startDate === undefined || rentDate?.endDate === undefined) {
+      toast.error("Please choose rent date !");
+      return;
+    }
+    createBooking(
+      booking.engine_id,
+      booking.user_id,
+      booking.start_date,
+      booking.end_date
+    );
+    toast.success("Booking successfully completed !");
   };
 
   return engine ? (
@@ -129,23 +126,15 @@ const EngineDetails = () => {
                 locale={locale}
                 format="DD-MM-YYYY"
                 onChange={onDateChange}
+                disabledDate={disabledDate}
               />
             </div>
-            {engine.availability ? (
-              <button
-                className="engine-details__rent-btn"
-                onClick={() => onRentClick(bookingInfos)}
-              >
-                Louer
-              </button>
-            ) : (
-              <button
-                className="engine-details__rent-btn"
-                onClick={() => onRentClick(bookingInfos)}
-              >
-                Louer
-              </button>
-            )}
+            <button
+              className="engine-details__rent-btn"
+              onClick={() => onRentClick(bookingInfos)}
+            >
+              Louer
+            </button>
           </div>
         </Col>
       </Row>

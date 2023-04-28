@@ -23,7 +23,7 @@ import {
   BookingsUpdateRequestBody,
 } from "../interfaces/BookingsRequestParams";
 
-// Auth (Sécuriser les routes)
+// Auth
 import { isAuthenticated } from "../auth";
 
 const bookingsController = new BookingsController();
@@ -33,7 +33,7 @@ const userController = new UserController();
 export function registerBookingsRoutes(server: FastifyInstance) {
   server.post(
     "/booking",
-    { schema: createBookingSchema },
+    { schema: createBookingSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Body: BookingsRequestBody }>, reply) => {
       const { engine_id, user_id, start_date, end_date } = request.body;
       const engine = await engineController.findOne(engine_id);
@@ -57,6 +57,7 @@ export function registerBookingsRoutes(server: FastifyInstance) {
 
   server.get(
     "/bookings",
+    { preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: BookingsIdParams }>, reply) => {
       const bookings = await bookingsController.findAllWithRelations();
       reply.send(bookings);
@@ -65,7 +66,7 @@ export function registerBookingsRoutes(server: FastifyInstance) {
 
   server.get(
     "/booking/:id",
-    { schema: getBookingSchema },
+    { schema: getBookingSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: BookingsIdParams }>, reply) => {
       const id = parseInt(request.params.id);
 
@@ -82,7 +83,7 @@ export function registerBookingsRoutes(server: FastifyInstance) {
 
   server.put(
     "/booking/:id",
-    { schema: updateBookingSchema },
+    { schema: updateBookingSchema, preHandler: isAuthenticated },
     async (
       request: FastifyRequest<{
         Params: BookingsIdParams;
@@ -121,7 +122,7 @@ export function registerBookingsRoutes(server: FastifyInstance) {
 
   server.delete(
     "/booking/:id",
-    { schema: deleteBookingSchema },
+    { schema: deleteBookingSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: BookingsIdParams }>, reply) => {
       const id = parseInt(request.params.id);
       const deleted = await bookingsController.delete(id);

@@ -35,9 +35,11 @@ export function verifyToken(token: string): number | null {
 
 export async function isAuthenticated(
   request: RequestWithUser,
-  reply: FastifyReply,
-  next: () => void
+  reply: FastifyReply
 ) {
+  console.log("isAuthenticated called");
+  console.log("Request URL:", request.url);
+  console.log("Request method:", request.method);
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
@@ -54,5 +56,4 @@ export async function isAuthenticated(
   }
 
   request.user = { id: userId };
-  next();
 }

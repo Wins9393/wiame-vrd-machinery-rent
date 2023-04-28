@@ -21,7 +21,7 @@ import {
   LoginRequestBody,
 } from "../interfaces/UserRequestParams";
 
-// Auth (Sécuriser les routes)
+// Auth
 import {
   generateToken,
   hashPassword,
@@ -71,7 +71,7 @@ export function registerUserRoutes(server: FastifyInstance) {
     reply.send({ token });
   });
 
-  server.get("/users", async () => {
+  server.get("/users", { preHandler: isAuthenticated }, async () => {
     return await userController.findAll();
   });
 
@@ -110,7 +110,7 @@ export function registerUserRoutes(server: FastifyInstance) {
 
   server.get(
     "/user/:id",
-    { schema: getUserSchema },
+    { schema: getUserSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: UserIdParams }>) => {
       const id = parseInt(request.params.id);
       return await userController.findOne(id);
@@ -119,7 +119,7 @@ export function registerUserRoutes(server: FastifyInstance) {
 
   server.put(
     "/user/:id",
-    { schema: updateUserSchema },
+    { schema: updateUserSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: UserIdParams }>) => {
       const id = parseInt(request.params.id);
       return await userController.update(id, request.body);
@@ -128,7 +128,7 @@ export function registerUserRoutes(server: FastifyInstance) {
 
   server.delete(
     "/user/:id",
-    { schema: deleteUserSchema },
+    { schema: deleteUserSchema, preHandler: isAuthenticated },
     async (request: FastifyRequest<{ Params: UserIdParams }>) => {
       const id = parseInt(request.params.id);
       await userController.delete(id);
