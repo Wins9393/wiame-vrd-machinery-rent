@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider as UserProvider } from "./contexts/UserContext";
 import { Provider as EngineContext } from "./contexts/EngineContext";
+import { Provider as BookingContext } from "./contexts/BookingContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import EngineDetails from "./containers/engine-details/EngineDetails";
 
@@ -26,8 +27,9 @@ root.render(
   <React.StrictMode>
     <UserProvider>
       <EngineContext>
-        {/* <App /> */}
-        <RouterProvider router={router} />
+        <BookingContext>
+          <RouterProvider router={router} />
+        </BookingContext>
       </EngineContext>
     </UserProvider>
   </React.StrictMode>

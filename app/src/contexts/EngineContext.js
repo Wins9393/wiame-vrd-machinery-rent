@@ -10,8 +10,6 @@ const Provider = ({ children }) => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/engines`);
     const data = await response.json();
 
-    console.log(data);
-
     setEngines(data);
   };
 
@@ -20,8 +18,6 @@ const Provider = ({ children }) => {
       `${process.env.REACT_APP_API_URL}/engine/${id}`
     );
     const data = await response.json();
-
-    console.log(data);
 
     setEngine(data);
   };

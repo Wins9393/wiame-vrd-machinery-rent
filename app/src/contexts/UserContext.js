@@ -46,8 +46,6 @@ const Provider = ({ children }) => {
         password: infosUser.password,
       }),
     });
-    // const data = await response.json();
-    // console.log(data);
   };
 
   const getUser = async (token) => {

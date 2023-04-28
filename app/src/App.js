@@ -5,6 +5,7 @@ import LoginPage from "./containers/login-page/LoginPage";
 import Home from "./containers/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import { Outlet, useLocation } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { isConnected, getUser, userId, getToken } = useContext(UserContext);
@@ -19,6 +20,7 @@ function App() {
   return isConnected ? (
     <div className="App">
       <Navbar />
+      <Toaster />
       {location.pathname === "/" ? <Home /> : <Outlet />}
     </div>
   ) : (
