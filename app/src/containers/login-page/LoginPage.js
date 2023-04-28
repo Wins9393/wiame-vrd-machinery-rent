@@ -1,6 +1,7 @@
 import { Button, Form, Input } from "antd";
 import { useContext, useState } from "react";
 import UserContext from "../../contexts/UserContext";
+import toast, { Toaster } from "react-hot-toast";
 import "./login-page.css";
 
 const LoginPage = () => {
@@ -9,13 +10,12 @@ const LoginPage = () => {
   const { verifyCredentials, createUser } = useContext(UserContext);
 
   const onConnexion = (infos) => {
-    console.log("Success: ", infos.email, infos.password);
     verifyCredentials(infos.email, infos.password);
   };
 
   const onRegister = (infos) => {
-    console.log("Success: ", infos);
     createUser(infos);
+    toast.success("Account created successfully !");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -35,6 +35,7 @@ const LoginPage = () => {
 
   return (
     <div className="login__container">
+      <Toaster />
       <h1>{isLogin ? "Connexion" : "Inscription"}</h1>
       <Form
         className="login__form"

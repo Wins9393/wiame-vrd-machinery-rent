@@ -90,7 +90,7 @@ const ClientInformations = () => {
   return (
     <div className="client-infos__container">
       <div className="client-infos__title-container">
-        <h2>Hello {user.firstName}</h2>
+        <h2>Hello {user?.firstName}</h2>
       </div>
       <div>
         <p style={{ textAlign: "center", marginBottom: "16px" }}>

@@ -46,6 +46,10 @@ const Provider = ({ children }) => {
         password: infosUser.password,
       }),
     });
+
+    if (response.ok) {
+      verifyCredentials(infosUser.email, infosUser.password);
+    }
   };
 
   const getUser = async (token) => {
