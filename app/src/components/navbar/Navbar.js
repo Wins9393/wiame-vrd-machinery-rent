@@ -5,7 +5,7 @@ import { LogoutOutlined, UserOutlined, LoginOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { isConnected, logout } = useContext(UserContext);
+  const { isConnected, logout, user } = useContext(UserContext);
 
   return (
     <div className="navbar">
@@ -18,7 +18,9 @@ const Navbar = () => {
         <div className="navbar__user-items">
           {isConnected ? (
             <>
-              <UserOutlined style={{ fontSize: "2rem", color: "#fff" }} />
+              <Link to={`/profile/${user?.id}`}>
+                <UserOutlined style={{ fontSize: "2rem", color: "#fff" }} />
+              </Link>
               <LogoutOutlined
                 onClick={logout}
                 style={{ fontSize: "2rem", color: "#fff" }}

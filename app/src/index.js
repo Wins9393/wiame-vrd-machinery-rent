@@ -8,6 +8,7 @@ import { Provider as EngineContext } from "./contexts/EngineContext";
 import { Provider as BookingContext } from "./contexts/BookingContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import EngineDetails from "./containers/engine-details/EngineDetails";
+import ClientInformations from "./containers/client-infos/ClientInformations";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/engine/:id",
         element: <EngineDetails />,
+      },
+      {
+        path: "/profile/:id",
+        element: <ClientInformations />,
       },
     ],
   },

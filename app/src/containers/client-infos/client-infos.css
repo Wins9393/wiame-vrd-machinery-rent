@@ -1,0 +1,6 @@
+.client-infos__title-container {
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
