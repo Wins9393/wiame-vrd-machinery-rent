@@ -18,10 +18,6 @@ const ClientInformations = () => {
     getBookingsByUser();
   }, [bookings]);
 
-  useEffect(() => {
-    console.log(bookingsByUser);
-  }, [bookings]);
-
   const getBookingsByUser = () => {
     const bookByUser = bookings.filter(
       (booking) => booking.user.id === user?.id

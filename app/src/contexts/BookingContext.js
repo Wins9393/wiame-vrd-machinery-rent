@@ -18,8 +18,6 @@ const Provider = ({ children }) => {
     });
     const data = await response.json();
 
-    console.log(data);
-
     setBookings(data);
   };
 
@@ -28,8 +26,6 @@ const Provider = ({ children }) => {
       `${process.env.REACT_APP_API_URL}/booking/${id}`
     );
     const data = await response.json();
-
-    console.log(data);
 
     setBooking(data);
   };

@@ -23,14 +23,12 @@ const LoginPage = () => {
   };
 
   const onValuesChange = (changedValues, allValues) => {
-    console.log(formInfos);
     setFormInfos(allValues);
   };
 
   const toggleLoginRegister = (e) => {
     e.preventDefault();
     setIsLogin((prev) => !prev);
-    console.log(isLogin);
   };
 
   return (

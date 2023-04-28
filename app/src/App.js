@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     getUser(getToken());
-    console.log(location);
   }, [userId]);
 
   return isConnected ? (
