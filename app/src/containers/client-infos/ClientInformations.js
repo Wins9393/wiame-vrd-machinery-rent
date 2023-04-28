@@ -30,7 +30,7 @@ const ClientInformations = () => {
     const endDate = dayjs(end);
 
     const daysDiff = endDate.diff(startDate, "day");
-    const totalPrice = daysDiff * price;
+    const totalPrice = (daysDiff + 1) * price;
     return `${totalPrice.toFixed(2)}€`;
   };
 
