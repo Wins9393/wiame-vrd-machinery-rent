@@ -14,7 +14,7 @@ const EngineDetails = () => {
   const [bookingInfos, setBookingInfos] = useState([]);
   const { getOneEngine, engine } = useContext(EngineContext);
   const { user } = useContext(UserContext);
-  const { createBooking } = useContext(BookingContext);
+  const { createBooking, createdBooking } = useContext(BookingContext);
 
   let { id } = useParams();
   const { RangePicker } = DatePicker;
@@ -33,8 +33,10 @@ const EngineDetails = () => {
   }, [user, rentDate, engine]);
 
   useEffect(() => {
-    console.log(bookingInfos);
-  }, [user, rentDate, engine, bookingInfos]);
+    if (createdBooking) {
+      toast.success("Booking successfully completed !");
+    }
+  }, [createdBooking]);
 
   const onDateChange = (value) => {
     let startDate = new Date(value[0].$d);

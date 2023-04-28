@@ -5,6 +5,7 @@ const BookingContext = createContext({});
 const Provider = ({ children }) => {
   const [bookings, setBookings] = useState([]);
   const [booking, setBooking] = useState({});
+  const [createdBooking, setCreatedBooking] = useState(false);
 
   const getAllBookings = async () => {
     const response = await fetch(`${process.env.REACT_APP_API_URL}/bookings`);
@@ -39,8 +40,9 @@ const Provider = ({ children }) => {
         end_date: endDate,
       }),
     });
-    const data = await response.json();
-    console.log(data);
+    if (response.ok) {
+      setCreatedBooking(true);
+    }
   };
 
   return (
@@ -51,6 +53,7 @@ const Provider = ({ children }) => {
         getOneBooking,
         booking,
         createBooking,
+        createdBooking,
       }}
     >
       {children}
