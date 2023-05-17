@@ -8,7 +8,6 @@ const Provider = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);
 
   const verifyCredentials = async (email, password) => {
-    console.log("email: ", email, "password :", password);
     const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
       method: "POST",
       headers: {
